@@ -4,17 +4,16 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+        if len(s)%2==1:
+            return False
         stack=[]
         for i in s:
-            if i == "[" or i == "{" or i == "(":
+            if i in {"(","[","{"}:
                 stack.append(i)
-            else:
-                if stack != [] and ((i == "]" and stack[-1] == "[") or (i == "}" and stack[-1] == "{") or (i == ")" and stack[-1] == "(")):
+            elif stack and (i == ")" and stack[-1]=="(" or i == "]" and stack[-1]=="[" or i == "}" and stack[-1]=="{"):
                     stack.pop()
-                else:
-                    return False
-        if stack == []:
-            return True
-        else:
-            return False
+            else:
+                return False
+        return not stack
             
+        
